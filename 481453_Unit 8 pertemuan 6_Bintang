@@ -1,0 +1,78 @@
+[analyst@secOps ~]$ sudo ./lab.support.files/scripts/configure_as_dhcp.sh
+[sudo] password for analyst: 
+Configuring the NIC to request IP info via DHCP...
+Requesting IP information...
+IP Configuration successful.
+
+[analyst@secOps ~]$ ping www.cisco.com
+ping: www.cisco.com: Temporary failure in name resolution
+[analyst@secOps ~]$ sudo ./lab.support.files/scripts/cyberops_extended_topo_no_fw.py
+[sudo] password for analyst: 
+*** Adding controller
+*** Add switches
+*** Add hosts
+*** Add links
+*** Starting network
+*** Configuring hosts
+R1 R4 H1 H2 H3 H4 H5 H6 H7 H8 H9 H10 H11 
+*** Starting controllers
+*** Starting switches
+*** Add routes
+*** Post configure switches and hosts
+*** Starting CLI:
+mininet> 
+Interrupt
+mininet> xterm R1
+mininet> xterm R1
+mininet> xterm R1
+mininet> xterm R1
+mininet> xterm H5
+mininet> xterm H10
+mininet> xterm R1
+mininet> xterm R1
+mininet> xterm H5
+mininet> xterm R1
+mininet> xtrem R1
+*** Unknown command: xtrem R1
+mininet> xtrm R1
+*** Unknown command: xtrm R1
+mininet> xterm R1
+mininet> xterm R1
+mininet> xterm H5
+mininet> xterm R1
+mininet> quit
+*** Stopping 0 controllers
+
+*** Stopping 14 terms
+*** Stopping 15 links
+...............
+*** Stopping 3 switches
+S5 S9 S10 
+*** Stopping 13 hosts
+R1 R4 H1 H2 H3 H4 H5 H6 H7 H8 H9 H10 H11 
+*** Done
+[analyst@secOps ~]$ sudo mn -c
+[sudo] password for analyst: 
+*** Removing excess controllers/ofprotocols/ofdatapaths/pings/noxes
+killall controller ofprotocol ofdatapath ping nox_core lt-nox_core ovs-openflowd ovs-controller udpbwtest mnexec ivs 2> /dev/null
+killall -9 controller ofprotocol ofdatapath ping nox_core lt-nox_core ovs-openflowd ovs-controller udpbwtest mnexec ivs 2> /dev/null
+pkill -9 -f "sudo mnexec"
+*** Removing junk from /tmp
+rm -f /tmp/vconn* /tmp/vlogs* /tmp/*.out /tmp/*.log
+*** Removing old X11 tunnels
+*** Removing excess kernel datapaths
+ps ax | egrep -o 'dp[0-9]+' | sed 's/dp/nl:/'
+***  Removing OVS datapaths
+ovs-vsctl --timeout=1 list-br
+ovs-vsctl --timeout=1 list-br
+*** Removing all links of the pattern foo-ethX
+ip link show | egrep -o '([-_.[:alnum:]]+-eth[[:digit:]]+)'
+ip link show
+*** Killing stale mininet node processes
+pkill -9 -f mininet:
+*** Shutting down stale tunnels
+pkill -9 -f Tunnel=Ethernet
+pkill -9 -f .ssh/mn
+rm -f ~/.ssh/mn/*
+*** Cleanup complete.
+[analyst@secOps ~]$ 
